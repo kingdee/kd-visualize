@@ -15,7 +15,7 @@
 
 #### 安装
 ```bash
-npm i kd-visualize -g
+npm i @kdcloudjs/kd-visualize -g
 ```
 #### 使用
 ```bash
