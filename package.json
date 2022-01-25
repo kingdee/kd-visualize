@@ -1,0 +1,59 @@
+{
+  "name": "kd-visualize",
+  "version": "1.0.4",
+  "description": "可视化脚手架",
+  "main": "src/main.js",
+  "repository": "https://github.com/oujj/visualize.git",
+  "author": "kingdee",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi generate tmp",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "bin": {
+    "kd-visualize": "./bin/www"
+  },
+  "dependencies": {
+    "@ant-design/pro-layout": "^6.5.0",
+    "@umijs/preset-react": "1.x",
+    "ahooks": "^2.10.4",
+    "echarts-for-react": "^3.0.1",
+    "react-scale-box": "^1.0.2",
+    "umi": "^3.4.22",
+    "axios": "^0.21.1",
+    "commander": "^7.2.0",
+    "inquirer": "^8.1.0",
+    "ora": "^5.4.1",
+    "remove": "^0.1.5",
+    "replace-in-file": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@umijs/test": "^3.4.22",
+    "lint-staged": "^10.0.7",
+    "prettier": "^2.2.0",
+    "react": "17.x",
+    "react-dom": "17.x",
+    "typescript": "^4.1.2",
+    "yorkie": "^2.0.0",
+    "eslint": "^7.28.0",
+    "husky": "^6.0.0"
+  }
+}
