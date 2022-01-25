@@ -1,9 +1,12 @@
 {
-  "name": "kd-visualize",
-  "version": "1.0.6",
+  "name": "@kdcloudjs/kd-visualize",
+  "version": "1.0.8",
   "description": "可视化脚手架",
   "main": "src/main.js",
-  "repository": "https://github.com/kdcloudone/kd-visualize.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kdcloudone/kd-visualize.git"
+  },
   "license": "Apache-2.0",
   "scripts": {
     "start": "umi dev",
@@ -12,7 +15,7 @@
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
-    "publish":"npm publish --access public"
+    "publish": "npm publish --access public"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -26,33 +29,41 @@
     ]
   },
   "bin": {
-    "kd-visualize": "./bin/www"
+    "kd-visualize": "bin/www"
   },
   "dependencies": {
     "@ant-design/pro-layout": "^6.5.0",
+    "@kdcloudjs/kd-charts": "^1.0.8",
     "@umijs/preset-react": "1.x",
     "ahooks": "^2.10.4",
-    "echarts-for-react": "^3.0.1",
-    "react-scale-box": "^1.0.2",
-    "umi": "^3.4.22",
     "axios": "^0.21.1",
     "commander": "^7.2.0",
+    "core-js": "^3.20.3",
+    "echarts": "^5.2.2",
+    "echarts-for-react": "^3.0.1",
     "inquirer": "^8.1.0",
     "ora": "^5.4.1",
+    "react-scale-box": "^1.0.2",
     "remove": "^0.1.5",
-    "replace-in-file": "^6.2.0"
+    "replace-in-file": "^6.2.0",
+    "umi": "^3.4.22"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@umijs/test": "^3.4.22",
+    "eslint": "^7.28.0",
+    "husky": "^6.0.0",
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.0",
     "react": "17.x",
     "react-dom": "17.x",
     "typescript": "^4.1.2",
-    "yorkie": "^2.0.0",
-    "eslint": "^7.28.0",
-    "husky": "^6.0.0"
-  }
+    "yorkie": "^2.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/kdcloudone/kd-visualize/issues"
+  },
+  "homepage": "https://github.com/kdcloudone/kd-visualize#readme",
+  "author": ""
 }
