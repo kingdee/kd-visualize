@@ -3,10 +3,8 @@
   "version": "1.0.4",
   "description": "可视化脚手架",
   "main": "src/main.js",
-  "repository": "https://github.com/oujj/visualize.git",
-  "author": "kingdee",
-  "license": "MIT",
-  "private": true,
+  "repository": "https://github.com/kdcloudone/kd-visualize.git",
+  "license": "Apache-2.0",
   "scripts": {
     "start": "umi dev",
     "build": "umi build",
