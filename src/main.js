@@ -6,17 +6,15 @@ const myCommand = {
   create: {
     alias: 'c', //别名
     description: '创建一个项目', // 描述
-    examples: [ // 示例
+    examples: [
+      // 示例
       'hxh-cli create <project-name>',
     ],
   },
   config: {
     alias: 'conf',
     description: '配置项目',
-    examples: [
-      'hxh config set <k> <v>',
-      'hxh config get <k>',
-    ],
+    examples: ['hxh config set <k> <v>', 'hxh config get <k>'],
   },
   '*': {
     alias: '',
@@ -50,14 +48,9 @@ Reflect.ownKeys(myCommand).forEach((action) => {
 
 // 处理 help 命令，打印出 example
 program.on('--help', () => {
-  console.log('\nExamples');
-  Reflect.ownKeys(myCommand).forEach(action => {
-    myCommand[action].examples.forEach(example => {
-      console.log(` ${example}`);
-    });
+  Reflect.ownKeys(myCommand).forEach((action) => {
+    myCommand[action].examples.forEach((example) => {});
   });
 });
 
-program
-  .version('0.0.1')
-  .parse(process.argv);
+program.version('0.0.1').parse(process.argv);
