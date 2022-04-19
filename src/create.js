@@ -44,7 +44,7 @@ const editFileAndDelGit = async function ({ projectName, downloadPath }) {
   try {
     const options = {
       files: [fullDownloadPath + '/**/*'],
-      from: /test/g, // 替换占位符
+      from: /kd-visualize/g, // 替换占位符
       to: projectName,
     };
     await replace(options);
