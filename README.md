@@ -10,7 +10,7 @@
 - 7680 x 2160（270 大屏）
 
 在等比例屏幕上通过同比例缩放来适配屏幕，  
-![DEMO效果图](<img src="https://charts.kingdee.design/charts/demo/infor_g.gif" width="500px" style="display: inline-block;" />)
+![DEMO效果图](<img src="https://charts.kingdee.design/charts/demo/infor_g.gif?raw=true" width="500px" style="display: inline-block;" />)
 
 
 ### 使用方法
