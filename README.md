@@ -10,8 +10,8 @@
 - 7680 x 2160（270 大屏）
 
 在等比例屏幕上通过同比例缩放来适配屏幕，  
+![Image text](<img src="./src/static/images/infor_g.gif" width="500px" style="display: inline-block;" />)
 
-<img src="./src/static/images/infor_g.gif" width="500px" style="display: inline-block;" />
 
 ### 使用方法
 
