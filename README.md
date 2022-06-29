@@ -9,8 +9,12 @@
 - 3840 x 2160（电视）
 - 7680 x 2160（270 大屏）
 
-在等比例屏幕上通过同比例缩放来适配屏幕，  
-![DEMO效果图](<img src="https://charts.kingdee.design/charts/demo/infor_g.gif?raw=true" width="500px" style="display: inline-block;" />)
+在等比例屏幕上通过同比例缩放来适配屏幕。
+
+  <a href="https://charts.kingdee.design/">
+    <img width="500" src="https://charts.kingdee.design/charts/demo/infor_g.gif">
+  </a>
+
 
 
 ### 使用方法
