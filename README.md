@@ -11,6 +11,8 @@
 
 在等比例屏幕上通过同比例缩放来适配屏幕，  
 
+<img src="./src/static/images/infor_g.gif" width="500px" style="display: inline-block;" />
+
 ### 使用方法
 
 #### 安装
