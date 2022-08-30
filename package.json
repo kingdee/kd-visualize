@@ -1,8 +1,11 @@
 {
   "name": "@kdcloudjs/kd-visualize",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "可视化脚手架",
   "main": "src/main.js",
+  "bugs": {
+    "url": "https://github.com/kdcloudone/kd-visualize/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kdcloudone/kd-visualize.git"
@@ -14,8 +17,7 @@
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
-    "test:coverage": "umi-test --coverage",
-    "publish": "npm publish --access public"
+    "test:coverage": "umi-test --coverage"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -28,13 +30,12 @@
       "prettier --parser=typescript --write"
     ]
   },
-  "bin": {
-    "kd-visualize": "bin/www"
-  },
   "dependencies": {
     "@ant-design/pro-layout": "^6.5.0",
     "@kdcloudjs/kd-charts": "^1.0.8",
     "@umijs/preset-react": "1.x",
+    "react": "17.x",
+    "react-dom": "17.x",
     "ahooks": "^2.10.4",
     "axios": "^0.21.1",
     "commander": "^7.2.0",
@@ -56,14 +57,9 @@
     "husky": "^6.0.0",
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.0",
-    "react": "17.x",
-    "react-dom": "17.x",
     "typescript": "^4.1.2",
     "yorkie": "^2.0.0"
   },
-  "bugs": {
-    "url": "https://github.com/kdcloudone/kd-visualize/issues"
-  },
-  "homepage": "https://github.com/kdcloudone/kd-visualize#readme",
-  "author": ""
+
+  "homepage": "https://github.com/kdcloudone/kd-visualize#readme"
 }

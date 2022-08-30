@@ -7,8 +7,8 @@ import redTheme from '@kdcloudjs/kd-charts/theme/echarts-theme-red.js';
 import naturalTheme from '@kdcloudjs/kd-charts/theme/echarts-theme-natural.js';
 import scienceTheme from '@kdcloudjs/kd-charts/theme/echarts-theme-science.js';
 import Bi_directional from '@/components/charts/bar/Bi_directional';
-import Stepbar from '@/components/charts/linebar/stepbar';
-import Basic from '@/components/charts/pie/basic';
+import Stepbar from '@/components/charts/linebar/Stepbar';
+import Basic from '@/components/charts/pie/Basic';
 import Choropleth from '@/components/charts/map/Choropleth';
 import './index.less';
 
