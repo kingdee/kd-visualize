@@ -2,10 +2,30 @@
   "singleQuote": true,
   "trailingComma": "all",
   "printWidth": 80,
+  "proseWrap": "never",
+  "endOfLine": "auto",
+  "semi": false,
   "overrides": [
     {
       "files": ".prettierrc",
-      "options": { "parser": "json" }
+      "options": {
+        "parser": "json"
+      }
+    },
+    {
+      "files": "*.less",
+      "options": {
+        "parser": "less"
+      }
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "parser": "markdown",
+        "jsxBracketSameLine": true,
+        "semi": false
+      }
     }
-  ]
+  ],
+  "parser": "typescript"
 }

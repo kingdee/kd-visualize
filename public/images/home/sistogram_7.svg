@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="67px" viewBox="0 0 12 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>柱状图/37@1x</title>
+    <defs>
+        <polygon id="path-1" points="-2.56461519e-14 63 -4.52970994e-14 3 6 5 12 3 12 63 6 65"></polygon>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FD2D2D" offset="0%"></stop>
+            <stop stop-color="#FFCD75" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#222222" stop-opacity="0.187800481" offset="0%"></stop>
+            <stop stop-color="#0D0D0D" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-819.000000, -408.000000)">
+            <g id="柱状图/37" transform="translate(819.000000, 408.000000)">
+                <polygon id="路径-4" fill="#F7F7F7" points="12 2 6 4 6 5 12 3"></polygon>
+                <polygon id="路径-4备份" fill="#F7F7F7" transform="translate(3.000000, 3.500000) scale(-1, 1) translate(-3.000000, -3.500000) " points="6 2 1.2490009e-14 4 1.2490009e-14 5 6 3"></polygon>
+                <polygon id="路径-7" fill="#FFFFFF" points="0 2 6 0 12 2 6 4"></polygon>
+                <polygon id="路径-4" fill="#000000" points="12 64 6 66 6 67 12 65"></polygon>
+                <polygon id="路径-4备份" fill="#000000" transform="translate(3.000000, 65.500000) scale(-1, 1) translate(-3.000000, -65.500000) " points="6 64 1.2490009e-14 66 1.2490009e-14 67 6 65"></polygon>
+                <polygon id="路径-7" fill="#2D2D2D" points="0 64 6 62 12 64 6 66"></polygon>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#F7F7F7" xlink:href="#path-1"></use>
+                <rect id="矩形" fill="url(#linearGradient-3)" mask="url(#mask-2)" x="0" y="-22" width="12" height="87"></rect>
+                <rect id="矩形" fill="url(#linearGradient-4)" mask="url(#mask-2)" x="6" y="-22" width="6" height="87"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

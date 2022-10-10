@@ -135,7 +135,7 @@ let dataList = [
     name: '北京',
     value: 428,
   },
-];
+]
 
 export const DefaultOption = {
   visualMap: {
@@ -182,4 +182,4 @@ export const DefaultOption = {
       data: dataList,
     },
   ],
-};
+}
