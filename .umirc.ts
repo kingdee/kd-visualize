@@ -24,10 +24,6 @@ export default defineConfig({
           component: '@/pages/home',
         },
         {
-          path: '/company',
-          component: '@/pages/company',
-        },
-        {
           path: '/t',
           component: '@/pages/template',
         },

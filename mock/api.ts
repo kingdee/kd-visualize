@@ -1854,19 +1854,19 @@ export default {
   },
   '/ierp/kapi/app/dicj_analyze/CompanyTodayBusinessTypeGross': {
     data: {
-      grossNum: { MS: '0.00', Slot: '0.00', VIP: '0.00' },
+      grossNum: { MS: '3.00', Slot: '4.00', VIP: '5.00' },
       grossDetail: {
         MS: [
-          { gross: '0.00', casion: '场地A' },
-          { gross: '0.00', casion: '场地B' },
+          { gross: '1.00', casion: '场地A' },
+          { gross: '2.00', casion: '场地B' },
         ],
         Slot: [
-          { gross: '0.00', casion: '场地A' },
-          { gross: '0.00', casion: '场地B' },
+          { gross: '3.00', casion: '场地A' },
+          { gross: '4.00', casion: '场地B' },
         ],
         VIP: [
-          { gross: '0.00', casion: '场地A' },
-          { gross: '0.00', casion: '场地B' },
+          { gross: '5.00', casion: '场地A' },
+          { gross: '6.00', casion: '场地B' },
         ],
       },
       tableDetail: {
@@ -1883,7 +1883,7 @@ export default {
           { open_number: 0, casion: '场地B' },
         ],
       },
-      tableNum: { MS: 0, Slot: 0, VIP: 0, unOpenNumber: 879 },
+      tableNum: { MS: 34, Slot: 55, VIP: 66, unOpenNumber: 879 },
       businessType: { VIP: 'VIP机器', Slot: '小型机器', MS: '中型机器' },
     },
     errorCode: 'success',
