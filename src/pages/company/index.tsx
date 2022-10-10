@@ -176,7 +176,7 @@ export default function IndexPage() {
     delete option.grid
 
     // console.log(JSON.stringify(option))
-    echartsRefCenter3?.current.getEchartsInstance().setOption(option, true)
+    echartsRefCenter3?.current?.getEchartsInstance().setOption(option, true)
   }
 
   // XXX同环比
