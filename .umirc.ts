@@ -1,12 +1,9 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  nodeModulesTransform: {
-    type: 'none',
-  },
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+  history: { type: 'hash' },
   routes: [
-    { path: '/', component: '@/pages/home/index' },
-    { path: '/infor', component: '@/pages/infor/index' },
+    { path: '/', component: 'home/index' },
   ],
-  fastRefresh: {},
 });

@@ -1,0 +1,60 @@
+.detailed-status-cards-container {
+  display: flex;
+  justify-content: space-evenly;
+  border-radius: 0px 0px 8px 8px;
+  margin-top: 16px;
+}
+
+:global {
+  .detailed-status-cards__card {
+    color: #ffffff;
+    width: 134px;
+    height: 148px;
+    background: rgba(0, 0, 0, 0.1);
+    // padding: 21px 0px 0px 27px;
+
+    border-radius: 8px;
+    border: 1px solid #002c9b;
+    position: relative;
+  }
+
+  .detailed-status-cards__img {
+    text-align: right;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    img {
+      width: 72px;
+      height: 72px;
+    }
+  }
+
+  .detailed-status-cards__label {
+    font-family: MicrosoftYaHei;
+    font-size: 16px;
+    color: #ffffff;
+    letter-spacing: 0;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-left: 27px;
+  }
+
+  .detailed-status-cards__value {
+    font-family: KINGDEEKB-Bold;
+    font-size: 32px;
+    color: #0a7aff;
+    letter-spacing: 0;
+    font-weight: 700;
+    margin-top: 13px;
+    margin-left: 27px;
+
+    .detailed-status-cards__unit {
+      margin-left: -6px;
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: #ffffff;
+      letter-spacing: 0;
+      font-weight: 400;
+    }
+  }
+}
