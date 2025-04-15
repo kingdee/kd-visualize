@@ -41,6 +41,7 @@
     "@visactor/react-vtable": "^1.15.2",
     "@visactor/vchart": "^1.13.4",
     "@visactor/vtable-plugins": "^1.15.2",
+    "axios": "^1.8.4",
     "echarts-gl": "^2.0.9",
     "lamina": "^1.1.23",
     "react-slick": "^0.30.2",
@@ -71,6 +72,5 @@
     "typescript": "^5.0.3",
     "zustand": "5.0.0-rc.2"
   },
-
   "homepage": "https://github.com/kdcloudone/kd-visualize#readme"
 }

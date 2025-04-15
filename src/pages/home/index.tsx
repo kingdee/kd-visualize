@@ -6,6 +6,7 @@ import chart11_icon_5 from '@/assets/images/chart11_icon_5.png';
 import chart11_icon_6 from '@/assets/images/chart11_icon_6.png';
 import chart11_icon_7 from '@/assets/images/chart11_icon_7.png';
 import GaugeChartCard from '@/components/Investmento-peration/GaugeChartCard';
+import request from '@/utils/request'; // 引入 Axios 实例
 import {
   BarChart,
   BigNumberChart,
@@ -14,8 +15,63 @@ import {
 } from '@kdcloudjs/kd-charts-card';
 import '@kdcloudjs/kd-charts-card/dist/kd-charts-card.css';
 import { Progress } from '@kdcloudjs/kdesign';
-import * as echarts from 'echarts';
+import { useEffect, useState } from 'react';
 import styles from './index.less';
+
+// 定义图标名称的联合类型
+type IconName =
+  | 'chart11_icon_1'
+  | 'chart11_icon_2'
+  | 'chart11_icon_3'
+  | 'chart11_icon_4'
+  | 'chart11_icon_5'
+  | 'chart11_icon_6'
+  | 'chart11_icon_7';
+
+// 定义数据结构接口
+interface BusinessIndicatorItem {
+  icon: IconName;
+  value?: number; // 示例字段，根据实际数据结构调整
+  label?: string; // 示例字段，根据实际数据结构调整
+}
+
+interface BusinessIndicatorsData {
+  top?: BusinessIndicatorItem[];
+  bottom?: BusinessIndicatorItem[];
+}
+
+interface ReceivableBalanceData {
+  top?: { icon: IconName; value?: number; label?: string }[];
+  bottom?: { value?: number; label?: string }[];
+  progress?: { percent: number };
+}
+
+interface OperatingProfitData {
+  top?: { value?: number; label?: string }[];
+  bottom?: { value?: number; label?: string }[];
+}
+
+interface OperatingIncomeData {
+  top?: { value?: number; label?: string }[];
+  bottom?: { value?: number; label?: string }[];
+}
+
+interface AssetData {
+  left1?: { value?: number; label?: string }[];
+  left2?: { value?: number; label?: string }[];
+  right1?: { value?: number; label?: string }[];
+  right2?: { value?: number; label?: string }[];
+}
+
+interface DashboardDataState {
+  seriesData: any; // 待优化：根据实际 API 数据结构定义
+  accountsSeriesData: any;
+  businessIndicatorsData: BusinessIndicatorsData | null;
+  receivableBalanceData: ReceivableBalanceData | null;
+  operatingProfitData: OperatingProfitData | null;
+  operatingIncomeData: OperatingIncomeData | null;
+  assetData: AssetData | null;
+}
 
 /**
  * 首页组件，展示各类经营指标图表。
@@ -23,86 +79,91 @@ import styles from './index.less';
  * @module HomePage
  */
 export default function HomePage() {
-  const seriesData = {
-    grid: {
-      top: '20%',
-      left: '1%',
-      right: '1%',
-      bottom: '1%',
-    },
-    xAxis: {
-      data: [
-        '08.13',
-        '08.14',
-        '08.15',
-        '08.16',
-        '08.17',
-        '08.18',
-        '08.19',
-        '08.20',
-        '08.21',
-        '08.22',
-        '08.23',
-        '08.24',
-        '08.25',
-        '08.26',
-      ],
-    },
-    yAxis: {
-      name: '万', // 设置单位
-    },
-    series: [
-      {
-        name: '数据量',
-        data: [
-          150, 160, 155, 145, 150, 165, 180, 175, 160, 170, 155, 190, 165, 170,
-        ],
-        areaStyle: {
-          // 添加区域阴影
-          color: {
-            type: 'linear',
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [
-              { offset: 0, color: 'rgba(255, 165, 0, 0.5)' }, // 顶部颜色
-              { offset: 1, color: 'rgba(255, 165, 0, 0)' }, // 底部颜色
-            ],
-          },
-        },
-        itemStyle: {
-          borderRadius: [10, 10, 0, 0],
-        },
-      },
-    ],
+  // 状态管理
+  const [dashboardData, setDashboardData] = useState<DashboardDataState>({
+    seriesData: null,
+    accountsSeriesData: null,
+    businessIndicatorsData: null,
+    receivableBalanceData: null,
+    operatingProfitData: null,
+    operatingIncomeData: null,
+    assetData: null,
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // 图标映射
+  const icons: Record<IconName, string> = {
+    chart11_icon_1,
+    chart11_icon_2,
+    chart11_icon_3,
+    chart11_icon_4,
+    chart11_icon_5,
+    chart11_icon_6,
+    chart11_icon_7,
   };
 
-  const accounts_seriesData = {
-    grid: {
-      top: '20%',
-      left: '0',
-      right: '0',
-      bottom: '0',
-    },
-    xAxis: {
-      data: ['1月', '2月', '3月', '4月', '5月', '6月'],
-    },
-    series: [
-      {
-        type: 'bar',
-        data: [200, 150, 180, 120, 200, 170], // 柱状图数据
-        itemStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: '#FFAC4C' }, // 顶部颜色
-            { offset: 1, color: '#504C4A' }, // 底部颜色
-          ]),
-          borderRadius: [10, 10, 0, 0],
-        },
-      },
-    ],
-  };
+  // 获取所有数据
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [
+          seriesDataResponse,
+          accountsSeriesDataResponse,
+          businessIndicatorsDataResponse,
+          receivableBalanceDataResponse,
+          operatingProfitDataResponse,
+          operatingIncomeDataResponse,
+          assetDataResponse,
+        ] = await Promise.all([
+          request.get('/series-data'),
+          request.get('/accounts-series'),
+          request.get('/business-indicators'),
+          request.get('/receivable-balance'),
+          request.get('/operating-profit'),
+          request.get('/operating-income'),
+          request.get('/asset-data'),
+        ]);
 
+        const seriesData = seriesDataResponse.data;
+        const accountsSeriesData = accountsSeriesDataResponse.data;
+        const businessIndicatorsData = businessIndicatorsDataResponse.data;
+        const receivableBalanceData = receivableBalanceDataResponse.data;
+        const operatingProfitData = operatingProfitDataResponse.data;
+        const operatingIncomeData = operatingIncomeDataResponse.data;
+        const assetData = assetDataResponse.data;
+
+        setDashboardData({
+          seriesData,
+          accountsSeriesData,
+          businessIndicatorsData,
+          receivableBalanceData,
+          operatingProfitData,
+          operatingIncomeData,
+          assetData,
+        });
+      } catch (err) {
+        console.error('Failed to fetch data:', err);
+        setError('数据加载失败，请稍后重试');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // 渲染加载或错误状态
+  if (loading) {
+    return <div className={styles.loading}>加载中...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.error}>{error}</div>;
+  }
+
+  // 渲染组件
   return (
     <div className={styles['investmento-peration']}>
       <img src={chart11_icon_3} className="investmento-peration-bg" />
@@ -110,46 +171,23 @@ export default function HomePage() {
       <ChartCard
         title="经营指标"
         className="business-indicators"
-        style={{
-          width: '396px',
-          height: '288px',
-        }}
+        style={{ width: '396px', height: '288px' }}
       >
         <div className="card-top">
           <BigNumberChart
-            data={[
-              {
-                icon: chart11_icon_1,
-                value: 3.5,
-                text: '经营投入指数',
-                unit: '',
-              },
-            ]}
+            data={dashboardData.businessIndicatorsData?.top?.map((item) => ({
+              ...item,
+              icon: icons[item.icon],
+            }))}
             type="2"
           />
         </div>
         <div className="card-bottom">
           <BigNumberChart
-            data={[
-              {
-                icon: chart11_icon_5,
-                value: 5.7,
-                text: '资金投入',
-                unit: '',
-              },
-              {
-                icon: chart11_icon_6,
-                value: 3.8,
-                text: '人力投入',
-                unit: '',
-              },
-              {
-                icon: chart11_icon_7,
-                value: '2.6',
-                text: '时间投入',
-                unit: '',
-              },
-            ]}
+            data={dashboardData.businessIndicatorsData?.bottom?.map((item) => ({
+              ...item,
+              icon: icons[item.icon],
+            }))}
             type="4"
           />
         </div>
@@ -157,42 +195,26 @@ export default function HomePage() {
       <ChartCard
         title="应收账款余额"
         className="receivable-balance"
-        style={{
-          width: '396px',
-          height: '330px',
-        }}
+        style={{ width: '396px', height: '330px' }}
       >
         <div className="card-top">
           <BigNumberChart
-            data={[
-              {
-                icon: chart11_icon_2,
-                value: 15693.32,
-                text: '',
-                unit: '万元',
-              },
-            ]}
+            data={dashboardData.receivableBalanceData?.top?.map((item) => ({
+              ...item,
+              icon: icons[item.icon],
+            }))}
             type="2"
           />
         </div>
         <div className="card-bottom">
           <BigNumberChart
-            data={[
-              {
-                value: '78%',
-                text: '完成度',
-                trend: '22678',
-                trendDirection: 'up',
-                trendTitle: '目标值(万元)',
-              },
-            ]}
+            data={dashboardData.receivableBalanceData?.bottom}
             type="6"
           />
         </div>
-
         <div className="card-bottom-progress">
           <Progress
-            percent={75}
+            percent={dashboardData.receivableBalanceData?.progress?.percent}
             showInfo={false}
             strokeColor={{
               '0%': '#735353',
@@ -201,14 +223,10 @@ export default function HomePage() {
           />
         </div>
       </ChartCard>
-
       <ChartCard
         title="经营利润"
         className="operating-profit"
-        style={{
-          width: '396px',
-          height: '308px',
-        }}
+        style={{ width: '396px', height: '308px' }}
       >
         <div className="card-top">
           <div className="child">
@@ -216,28 +234,14 @@ export default function HomePage() {
           </div>
           <div className="child">
             <BigNumberChart
-              data={[
-                {
-                  value: '58.46%',
-                  text: '完成率',
-                  unit: '',
-                },
-              ]}
+              data={dashboardData.operatingProfitData?.top}
               type="4"
             />
           </div>
         </div>
         <div className="card-bottom">
           <BigNumberChart
-            data={[
-              {
-                value: '5,845,699.00',
-                text: '完成量',
-                trend: '8%',
-                trendDirection: 'up',
-                trendTitle: '环比',
-              },
-            ]}
+            data={dashboardData.operatingProfitData?.bottom}
             type="6"
           />
         </div>
@@ -245,10 +249,7 @@ export default function HomePage() {
       <ChartCard
         title="经营收入"
         className="operating-income"
-        style={{
-          width: '396px',
-          height: '310px',
-        }}
+        style={{ width: '396px', height: '310px' }}
       >
         <div className="card-top">
           <div className="child">
@@ -256,145 +257,62 @@ export default function HomePage() {
           </div>
           <div className="child">
             <BigNumberChart
-              data={[
-                {
-                  value: '58.46%',
-                  text: '完成率',
-                  unit: '',
-                },
-              ]}
+              data={dashboardData.operatingIncomeData?.top}
               type="4"
             />
           </div>
         </div>
         <div className="card-bottom">
           <BigNumberChart
-            data={[
-              {
-                value: '5,845,699.00',
-                text: '完成量',
-                trend: '8%',
-                trendDirection: 'up',
-                trendTitle: '环比',
-              },
-            ]}
+            data={dashboardData.operatingIncomeData?.bottom}
             type="6"
           />
         </div>
       </ChartCard>
-
       <ChartCard
         title="应收账款余额趋势"
         className="accounts-receivable-balance"
-        style={{
-          width: '396px',
-          height: '288px',
-        }}
+        style={{ width: '396px', height: '288px' }}
       >
-        <BarChart options={accounts_seriesData} />
+        <BarChart options={dashboardData.accountsSeriesData} />
       </ChartCard>
-
       <ChartCard
         title="经营利润趋势"
         className="security-alarm"
-        style={{
-          width: '716px',
-          height: '288px',
-        }}
+        style={{ width: '716px', height: '288px' }}
       >
-        <LineChart options={seriesData} />
+        <LineChart options={dashboardData.seriesData} />
       </ChartCard>
-
       <ChartCard
         title="经营收入趋势"
         className="trend-operating-income"
-        style={{
-          width: '745px',
-          height: '288px',
-        }}
+        style={{ width: '745px', height: '288px' }}
       >
-        <LineChart options={seriesData} />
+        <LineChart options={dashboardData.seriesData} />
       </ChartCard>
-
       <div
         className="asset-data-left1"
-        style={{
-          width: '188px',
-          height: '211px',
-        }}
+        style={{ width: '188px', height: '211px' }}
       >
-        <BigNumberChart
-          data={[
-            {
-              value: '56.2',
-              unit: '',
-              text: '资产负债率',
-              trend: '↑13%',
-              trendTitle: '环比',
-            },
-          ]}
-          type="5"
-        />
+        <BigNumberChart data={dashboardData.assetData?.left1} type="5" />
       </div>
       <div
         className="asset-data-left2"
-        style={{
-          width: '188px',
-          height: '211px',
-        }}
+        style={{ width: '188px', height: '211px' }}
       >
-        <BigNumberChart
-          data={[
-            {
-              value: '76.8%',
-              unit: '',
-              text: '净资产收益率',
-              trend: '↑73%',
-              trendTitle: '环比',
-            },
-          ]}
-          type="5"
-        />
+        <BigNumberChart data={dashboardData.assetData?.left2} type="5" />
       </div>
       <div
         className="asset-data-right1"
-        style={{
-          width: '188px',
-          height: '211px',
-        }}
+        style={{ width: '188px', height: '211px' }}
       >
-        <BigNumberChart
-          data={[
-            {
-              value: '56.2',
-              unit: '',
-              text: '资产保值增值率',
-              trend: '↑13%',
-              trendTitle: '环比',
-            },
-          ]}
-          type="5"
-        />
+        <BigNumberChart data={dashboardData.assetData?.right1} type="5" />
       </div>
       <div
         className="asset-data-right2"
-        style={{
-          width: '188px',
-          height: '211px',
-        }}
+        style={{ width: '188px', height: '211px' }}
       >
-        <BigNumberChart
-          data={[
-            {
-              value: '122.8%',
-              unit: '',
-              text: '流动比率',
-              trend: '↑3%',
-              trendTitle: '环比',
-            },
-          ]}
-          type="5"
-        />
+        <BigNumberChart data={dashboardData.assetData?.right2} type="5" />
       </div>
     </div>
   );
